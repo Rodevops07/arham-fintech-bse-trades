@@ -13,7 +13,6 @@ interface MetricsHeaderProps {
 }
 
 export const MetricsHeader: React.FC<MetricsHeaderProps> = ({ summary, pullStatus }) => {
-  // Format gross value in Indian Crores or Lakhs
   const formatINR = (val: number) => {
     if (!val) return '₹0.00';
     if (val >= 10000000) {
@@ -30,97 +29,95 @@ export const MetricsHeader: React.FC<MetricsHeaderProps> = ({ summary, pullStatu
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       {/* Total Ingested Trades */}
-      <div className="bg-[#111827] border border-slate-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Ingested Trades</p>
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
-            <Database className="w-4 h-4" />
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Total Ingested Trades</p>
+          <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+            <Database className="w-4.5 h-4.5" />
           </div>
         </div>
-        <div className="mt-2 flex items-baseline space-x-2">
-          <span className="text-2xl font-bold mono text-white">
+        <div className="mt-2.5 flex items-baseline space-x-2">
+          <span className="text-2xl font-extrabold mono text-slate-900">
             {(summary.totalTrades || 0).toLocaleString('en-IN')}
           </span>
-          <span className="text-xs text-slate-400">records</span>
+          <span className="text-xs font-medium text-slate-500">records</span>
         </div>
-        <p className="text-[11px] text-slate-400 mt-1 flex items-center space-x-1">
-          <span className="text-emerald-400 font-medium">Instant Load</span>
+        <p className="text-[11px] text-slate-500 mt-1 flex items-center space-x-1.5 font-medium">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+          <span className="text-emerald-700 font-semibold">Instant Load</span>
           <span>from local SQLite cache</span>
         </p>
-        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-xl pointer-events-none" />
       </div>
 
       {/* Gross Notional Value */}
-      <div className="bg-[#111827] border border-slate-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Gross Notional Value</p>
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-            <TrendingUp className="w-4 h-4" />
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Gross Notional Value</p>
+          <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+            <TrendingUp className="w-4.5 h-4.5" />
           </div>
         </div>
-        <div className="mt-2 flex items-baseline space-x-2">
-          <span className="text-2xl font-bold mono text-emerald-400">
+        <div className="mt-2.5 flex items-baseline space-x-2">
+          <span className="text-2xl font-extrabold mono text-emerald-600">
             {formatINR(summary.grossValue)}
           </span>
         </div>
-        <p className="text-[11px] text-slate-400 mt-1">
-          Avg Price: <span className="mono text-slate-200">₹{(summary.avgPrice || 0).toFixed(2)}</span>
+        <p className="text-[11px] text-slate-500 mt-1 font-medium">
+          Avg Price: <span className="mono font-semibold text-slate-700">₹{(summary.avgPrice || 0).toFixed(2)}</span>
         </p>
-        <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl pointer-events-none" />
       </div>
 
       {/* Total Traded Volume */}
-      <div className="bg-[#111827] border border-slate-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Traded Share Volume</p>
-          <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
-            <BarChart3 className="w-4 h-4" />
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Traded Share Volume</p>
+          <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
+            <BarChart3 className="w-4.5 h-4.5" />
           </div>
         </div>
-        <div className="mt-2 flex items-baseline space-x-2">
-          <span className="text-2xl font-bold mono text-white">
+        <div className="mt-2.5 flex items-baseline space-x-2">
+          <span className="text-2xl font-extrabold mono text-slate-900">
             {(summary.totalVolume || 0).toLocaleString('en-IN')}
           </span>
-          <span className="text-xs text-slate-400">units</span>
+          <span className="text-xs font-medium text-slate-500">units</span>
         </div>
-        <p className="text-[11px] text-slate-400 mt-1">
+        <p className="text-[11px] text-slate-500 mt-1 font-medium">
           BSE Equity instruments executed
         </p>
-        <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl pointer-events-none" />
       </div>
 
       {/* Ingestion Engine Status */}
-      <div className="bg-[#111827] border border-slate-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Pull Engine Status</p>
-          <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400">
-            <Clock className="w-4 h-4" />
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Pull Engine Status</p>
+          <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
+            <Clock className="w-4.5 h-4.5" />
           </div>
         </div>
-        <div className="mt-2 flex items-center space-x-2">
+        <div className="mt-2.5 flex items-center space-x-2">
           {isPulling ? (
             <>
-              <Loader2 className="w-5 h-5 text-amber-400 animate-spin" />
-              <span className="text-base font-bold text-amber-400">Pulling in Progress</span>
+              <Loader2 className="w-5 h-5 text-amber-600 animate-spin" />
+              <span className="text-base font-bold text-amber-700">Pulling in Progress</span>
             </>
           ) : pullStatus.status === 'COMPLETED' ? (
             <>
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-              <span className="text-base font-bold text-emerald-400">Synced / Completed</span>
+              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+              <span className="text-base font-bold text-emerald-700">Synced / Completed</span>
             </>
           ) : pullStatus.status === 'FAILED' ? (
             <>
-              <AlertCircle className="w-5 h-5 text-rose-400" />
-              <span className="text-base font-bold text-rose-400">Failed</span>
+              <AlertCircle className="w-5 h-5 text-rose-600" />
+              <span className="text-base font-bold text-rose-700">Failed</span>
             </>
           ) : (
             <>
-              <span className="w-3 h-3 rounded-full bg-slate-500" />
-              <span className="text-base font-bold text-slate-300">Ready (Idle)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+              <span className="text-base font-bold text-slate-700">Ready (Idle)</span>
             </>
           )}
         </div>
-        <div className="text-[11px] text-slate-400 mt-1">
+        <div className="text-[11px] text-slate-500 mt-1 font-medium">
           {isPulling ? (
             <span>Batch {pullStatus.currentBatch}/{pullStatus.totalBatches} (ETA: {pullStatus.etaSeconds}s)</span>
           ) : (
