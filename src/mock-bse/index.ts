@@ -12,6 +12,22 @@ const PORT = process.env.BSE_PORT || 4000;
 // Can be overridden via env var or query parameter ?delay=...
 let configuredTotalDelaySeconds = Number(process.env.BSE_PULL_DELAY_SECONDS) || 900;
 
+// Root endpoint for browser visits
+app.get('/', (req, res) => {
+  res.json({
+    service: 'Mock BSE Exchange API',
+    status: 'ONLINE',
+    seededTrades: ALL_TRADES.length,
+    configuredTotalDelaySeconds,
+    endpoints: {
+      getTrades: '/getTrades (e.g. /getTrades?page=1&limit=50&delay=10)',
+      status: '/status',
+      config: 'POST /config'
+    },
+    dashboardUrl: 'http://localhost:3000'
+  });
+});
+
 // Seed 5,000 realistic BSE trades
 const ALL_TRADES: Trade[] = generateSeededTrades(5000);
 

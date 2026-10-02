@@ -18,6 +18,21 @@ initWebSocketServer(server);
 // Ensure initial historical data exists so dashboard opens instantly
 seedInitialHistoricalTrades();
 
+// Root endpoint for browser visits
+app.get('/', (req, res) => {
+  res.json({
+    service: 'ARHAM Trades Backend Server & WebSocket Hub',
+    status: 'ONLINE',
+    endpoints: {
+      trades: '/api/trades',
+      pullStatus: '/api/pull-status',
+      startPull: 'POST /api/pull/start',
+      webSocket: 'ws://localhost:5001/ws'
+    },
+    dashboardUrl: 'http://localhost:3000'
+  });
+});
+
 /**
  * GET /api/trades
  * Instant retrieval of ingested trades with filtering & pagination
