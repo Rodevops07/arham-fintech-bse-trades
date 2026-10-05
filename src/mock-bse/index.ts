@@ -46,9 +46,10 @@ console.log(`[Mock BSE Exchange API] Default full pull delay configured to: ${co
 app.get('/getTrades', async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page as string, 10) || 1);
   const limit = Math.max(1, parseInt(req.query.limit as string, 10) || 500);
+  // If delay is explicitly provided in query, use it; otherwise default to 0 for instant browser inspection
   const requestedDelay = req.query.delay !== undefined 
     ? Math.max(0, parseFloat(req.query.delay as string))
-    : configuredTotalDelaySeconds;
+    : 0;
   const isMonolithic = req.query.monolithic === 'true';
 
   const totalRecords = ALL_TRADES.length;
